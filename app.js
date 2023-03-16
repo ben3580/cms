@@ -10,6 +10,7 @@ const User = require('./models/User')
 
 var indexRouter = require('./routes/index');
 var coursesRouter = require('./routes/courses');
+const Course = require('./models/Course');
 
 var app = express();
 
@@ -53,6 +54,15 @@ app.use(function(err, req, res, next) {
 async function setup() {
   const subu = await User.create({ username: "subu", password: "1234" });
   console.log("subu instance created...")
+  const webdev = await Course.create(
+    {
+      courseid: "CPTS489",
+      coursename: "Web Development",
+      semester: "Spring",
+      coursedesc: "Introduction to Web Development",
+      enrollnum: 80
+    }
+  )
 }
 
 sequelize.sync({ force: true }).then(()=>{
