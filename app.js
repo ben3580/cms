@@ -4,6 +4,8 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const session = require('express-session')
+const sequelize = require('./db')
+const User = require('./models/User')
 
 
 var indexRouter = require('./routes/index');
@@ -47,5 +49,15 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+async function setup() {
+  const subu = await User.create({ username: "subu", password: "1234" });
+  console.log("subu instance created...")
+}
+
+sequelize.sync({ force: true }).then(()=>{
+  console.log("Sequelize Sync Completed...");
+  setup().then(()=> console.log("User setup complete"))
+})
 
 module.exports = app;
