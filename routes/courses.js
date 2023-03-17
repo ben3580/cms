@@ -13,13 +13,14 @@ const sessionChecker = (req, res, next)=>{
 router.use(sessionChecker)
 
 /* GET users listing. */
-router.get('/', function(req, res, next) {
+router.get('/', async function(req, res, next) {
   //console.log(req.session.user)
+  const courses = await Course.findAll();
   if(req.query.msg){
     res.locals.msg = req.query.msg
     res.locals.courseid = req.query.courseid
   }
-  res.render('courses')
+  res.render('courses', { courses })
 });
 
 router.post('/create', async function(req, res, next) {
@@ -38,5 +39,24 @@ router.post('/create', async function(req, res, next) {
   res.redirect('/courses?msg='+new URLSearchParams(error.toString()).toString()+'&courseid'+req.body.courseid) 
   }
 });
+
+router.get("/:courseid", async function(req, res, next) {
+  const course = await Course.findCourse(req.params.courseid)
+  if(course){
+    res.render('coursedetails',{course})
+  }else{
+    res.redirect('/courses/?msg=course+not+found&?courseid='+req.params.courseid)
+  }
+})
+
+router.get("/delete/:courseid", async function(req, res, next) {
+  const course = await Course.findCourse(req.params.courseid)
+  if(course){
+    await course.destroy()
+    res.redirect('/courses/?msg=successdel&?courseid='+req.params.courseid)
+  }else{
+    res.redirect('/courses/?msg=course+not+found&?courseid='+req.params.courseid)
+  }
+})
 
 module.exports = router;
