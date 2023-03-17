@@ -4,6 +4,7 @@ const Course = require('../models/Course')
 
 const sessionChecker = (req, res, next)=>{
   if(req.session.user){
+    res.locals.username = req.session.user.username
     next()
   }else{
     res.redirect("/?msg=raf")
@@ -34,7 +35,7 @@ router.post('/create', async function(req, res, next) {
         enrollnum: req.body.enrollnum
       }
   )
-  res.redirect('/courses?msg=success&courseid'+req.body.courseid)
+  res.redirect('/courses?msg=success&courseid='+req.body.courseid)
   } catch (error) {
   res.redirect('/courses?msg='+new URLSearchParams(error.toString()).toString()+'&courseid'+req.body.courseid) 
   }
@@ -53,9 +54,9 @@ router.get("/delete/:courseid", async function(req, res, next) {
   const course = await Course.findCourse(req.params.courseid)
   if(course){
     await course.destroy()
-    res.redirect('/courses/?msg=successdel&?courseid='+req.params.courseid)
+    res.redirect('/courses/?msg=successdel&courseid='+req.params.courseid)
   }else{
-    res.redirect('/courses/?msg=course+not+found&?courseid='+req.params.courseid)
+    res.redirect('/courses/?msg=course+not+found&courseid='+req.params.courseid)
   }
 })
 
