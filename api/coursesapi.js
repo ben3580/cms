@@ -2,6 +2,28 @@ const express = require('express');
 const router = express.Router();
 const Course = require('../models/Course')
 
+
+const sessionChecker = (req, res, next)=>{
+    if(req.session.user){
+      res.locals.username = req.session.user.username
+      next()
+    }else{
+      res.status(401).json({message: "no authorization credentials"})
+    }
+  }
+
+router.use(sessionChecker)
+
+/**
+ * @openapi
+ * /:
+ *   get:
+ *     description: Welcome Courses API doc!
+ *     responses:
+ *       200:
+ *         description: Returns all Courses.
+ */
+
 router.get('/',async (req, res, next)=>{
     const courses = await Course.findAll();
     if(req.query.msg){

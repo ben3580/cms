@@ -25,6 +25,27 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+//swagger related
+const swaggerJsdoc = require('swagger-jsdoc');
+
+const options = {
+  definition: {
+    openapi: '3.0.0',
+    info: {
+      title: 'Courses API',
+      version: '1.0.0',
+    },
+  },
+  apis: ['./api/courseapi.js'], // files containing annotations as above
+};
+
+const openapiSpecification = swaggerJsdoc(options);
+
+const swaggerUi = require('swagger-ui-express');
+
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(openapiSpecification));
+
 app.set('trust proxy', 1) // trust first proxy
 app.use(session({
   secret: 'wsu489',
@@ -53,6 +74,8 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
+
+
 async function setup() {
   const subu = await User.create({ username: "subu", password: "1234" });
   console.log("subu instance created...")
@@ -66,6 +89,8 @@ async function setup() {
     }
   )
 }
+
+
 
 sequelize.sync({ force: true }).then(()=>{
   console.log("Sequelize Sync Completed...");
