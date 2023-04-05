@@ -1,11 +1,14 @@
-var express = require('express');
+var express = require("express");
 var router = express.Router();
-var courseApiRouter = require('../api/courseapi')
+var courseApiRouter = require("../api/courseapi");
+var cors = require("cors");
 
-router.use('/courses', courseApiRouter)
+router.use(cors());
 
-router.get("/", (req, res, next)=>{
-    res.send('in api route')
-})
+router.use("/courses", courseApiRouter);
 
-module.exports = router
+router.get("/", (req, res, next) => {
+  res.send("in api route");
+});
+
+module.exports = router;
