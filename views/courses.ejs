@@ -65,7 +65,7 @@
       </thead>
       <tbody>
         <% for (course of courses) { %>
-          <tr>
+          <tr id= <%= course.courseid %>>
             <td scope="row"><a href=<%= "/courses/"+course.courseid %>><%= course.courseid %></a></td>
             <td><%= course.coursename %></td>
             <td><%= course.semester %></td>

@@ -48,8 +48,9 @@ async function createcourse() {
     await driver.wait(until.elementLocated(By.id("CPTS421")), 1000);
   } catch (err) {
     console.log(err);
+    throw err;
   } finally {
-    //await driver.quit();
+    await driver.quit();
   }
 }
 test("Creation of a course using selenium", async () => {
