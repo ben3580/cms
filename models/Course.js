@@ -3,10 +3,9 @@ const { Model, DataTypes } = require("sequelize");
 
 //TODO: You need to modify this model (or create a new one to suit your needs)
 class Course extends Model {
-  static async findCourse(courseid) {
+  static async findCourse(recordid) {
     try {
-      //TODO: Instead of courseid you may query using something else (may be firstname and lastname)
-      const course = await Course.findOne({ where: { courseid: courseid } });
+      const course = await Course.findByPk(recordid);
       return course ? course : null;
     } catch (error) {
       console.log(error);
@@ -17,7 +16,8 @@ class Course extends Model {
 
 Course.init(
   {
-    // DO NOT MODIFY -- I changed the course model and introduced this to help you
+    // I changed the course model and introduced this to help you
+    // You may leave this record id as is for your solution
     recordid: {
       type: DataTypes.INTEGER,
       autoIncrement: true,

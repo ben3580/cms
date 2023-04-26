@@ -1,6 +1,6 @@
 <% if (locals.msg) {%> <% if (msg === "success") { %>
 <div class="alert alert-success alert-dismissible fade show" role="alert">
-  <strong>Course <%=courseid%></strong> added Succesfully.
+  Course added Succesfully.
   <button
     type="button"
     class="btn-close"
@@ -10,7 +10,7 @@
 </div>
 <% } else if (msg === "successdel") { %>
 <div class="alert alert-success alert-dismissible fade show" role="alert">
-  <strong>Course <%=courseid%></strong> deleted Succesfully.
+  Course deleted Succesfully.
   <button
     type="button"
     class="btn-close"
@@ -21,8 +21,7 @@
 <% } else { %>
 
 <div class="alert alert-danger alert-dismissible fade show" role="alert">
-  <strong>Course <%=courseid%></strong> can not be added/deleted/found due to
-  the errors below.
+  Course can not be added/deleted/found due to the errors below.
   <p class="mb-0"><%=msg%></p>
   <button
     type="button"

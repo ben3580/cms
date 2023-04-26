@@ -22,7 +22,6 @@ router.get("/", async function (req, res, next) {
   const courses = await Course.findAll();
   if (req.query.msg) {
     res.locals.msg = req.query.msg;
-    res.locals.courseid = req.query.courseid;
   }
   res.render("courses", { courses });
 });
@@ -48,25 +47,20 @@ router.post(
           coursedesc: req.body.coursedesc,
           enrollnum: req.body.enrollnum,
         });
-        res.redirect("/?msg=success&courseid=" + req.body.courseid);
+        res.redirect("/?msg=success");
       }
     } catch (error) {
-      res.redirect(
-        "/?msg=" +
-          new URLSearchParams(error.toString()).toString() +
-          "&courseid=" +
-          req.body.courseid
-      );
+      res.redirect("/?msg=" + new URLSearchParams(error.toString()).toString());
     }
   }
 );
 
-router.get("/:courseid", async function (req, res, next) {
-  const course = await Course.findCourse(req.params.courseid);
+router.get("/:recordid", async function (req, res, next) {
+  const course = await Course.findCourse(req.params.recordid);
   if (course) {
     res.render("coursedetails", { course });
   } else {
-    res.redirect("/?msg=course+not+found&?courseid=" + req.params.courseid);
+    res.redirect("/?msg=course+not+found");
   }
 });
 
