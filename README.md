@@ -1,2 +1,3 @@
 # cms
-Course Management System - Micro Project for CPTS 489 WSU
+
+Cleaned up CMS project to use as base for the exam

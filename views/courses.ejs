@@ -13,10 +13,9 @@
     </style>
 </head>
 <body>
-  <%- include("header") %>
 <section id="course-form">
 <div class="container-lg">
-  <form method="post" action="/courses/create">
+  <form method="post" action="/create">
     <div class="form-group">
       <label for="exampleFormControlInput1">Course ID</label>
       <input required name ="courseid" type="text" class="form-control" id="exampleFormControlInput1" placeholder="CPTS_123">
@@ -66,13 +65,12 @@
       <tbody>
         <% for (course of courses) { %>
           <tr>
-            <td scope="row"><a href=<%= "/courses/"+course.courseid %>><%= course.courseid %></a></td>
+            <td scope="row"><a href=<%= "/"+course.courseid %>><%= course.courseid %></a></td>
             <td><%= course.coursename %></td>
             <td><%= course.semester %></td>
             <td><%= course.enrollnum %></td>
           </tr>
         <% } %>
-        </tr>
       </tbody>
     </table>
     <%if (!locals.courses || courses.length == 0) { %>
