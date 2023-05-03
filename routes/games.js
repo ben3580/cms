@@ -5,21 +5,12 @@ const Game = require("../models/Game");
 
 /* Validators */
 //TODO: THis is where you need to implement your custom validators
-// const courseidValidator = async (value) => {
-//   if (!value.startsWith("CPTS")) {
-//     throw new Error("CourseID must start with CPTS");
-//   }
-// };
-// const enrollnumValidator = async (value, { req }) => {
-//   const courseid = req.body.courseid;
-//   const courseType = courseid.charAt(4);
-//   if (courseType == 4 && value > 60) {
-//     throw new Error("For 400 level courses enrollnum should not exceed 60");
-//   }
-// };
-const dummyValidator = async (value) => {
-  if (false) {
-    throw new Error("CourseID must start with CPTS");
+const nameValidator = async (value) => {
+  if (value.length > 50) {
+    throw new Error("Game name must be less than 50 characters");
+  }
+  if (value.trim() === "") {
+    throw new Error("Game name cannot be empty");
   }
 };
 
@@ -34,7 +25,7 @@ router.get("/", async function (req, res, next) {
 router.post(
   "/create",
   //TODO: This is where you will be using your custom validators
-  body("gamename").custom(dummyValidator),
+  body("gamename").custom(nameValidator),
   async function (req, res, next) {
     try {
       const result = validationResult(req);
