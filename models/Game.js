@@ -2,11 +2,11 @@ const sequelize = require("../db");
 const { Model, DataTypes } = require("sequelize");
 
 //TODO: You need to modify this model (or create a new one to suit your needs)
-class Course extends Model {
-  static async findCourse(recordid) {
+class Game extends Model {
+  static async findGame(recordid) {
     try {
-      const course = await Course.findByPk(recordid);
-      return course ? course : null;
+      const game = await Game.findByPk(recordid);
+      return game ? game : null;
     } catch (error) {
       console.log(error);
       return null;
@@ -14,7 +14,7 @@ class Course extends Model {
   }
 }
 
-Course.init(
+Game.init(
   {
     // I changed the course model and introduced this to help you
     // You may leave this record id as is for your solution
@@ -24,33 +24,31 @@ Course.init(
       primaryKey: true,
     },
     //TODO: you need to start changing the fields below to suit your needs
-    courseid: {
-      type: DataTypes.STRING,
-      // REMOVE the 'unique' constraint if your field doesn't need it
-      unique: true,
-      allowNull: false,
-    },
-    coursename: {
+    gamename: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    semester: {
+    gamegenre: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    coursedesc: {
+    gamedesc: {
       type: DataTypes.TEXT,
       allowNull: false,
     },
-    enrollnum: {
-      type: DataTypes.INTEGER,
+    gamerating: {
+      type: DataTypes.FLOAT,
+      allowNull: false,
+    },
+    gameprice: {
+      type: DataTypes.FLOAT,
       allowNull: false,
     },
   },
   {
     sequelize,
-    modelName: "Course",
+    modelName: "Game",
   }
 );
 
-module.exports = Course;
+module.exports = Game;

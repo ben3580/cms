@@ -3,8 +3,8 @@ var express = require("express");
 var path = require("path");
 const sequelize = require("./db");
 
-var coursesRouter = require("./routes/courses");
-const Course = require("./models/Course");
+var gamesRouter = require("./routes/games");
+const Game = require("./models/Game");
 
 var app = express();
 
@@ -16,7 +16,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
 
-app.use("/", coursesRouter);
+app.use("/", gamesRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -36,12 +36,12 @@ app.use(function (err, req, res, next) {
 
 async function setup() {
   //TODO: This where you will create your very first instance
-  const webdev = await Course.create({
-    courseid: "CPTS489",
-    coursename: "Web Development",
-    semester: "Spring",
-    coursedesc: "Introduction to Web Development",
-    enrollnum: 80,
+  const ROR2 = await Game.create({
+    gamename: "Risk of Rain 2",
+    gamegenre: "Roguelike",
+    gamedesc: "ATG + ICBM + Clover + You're dead",
+    gamerating: 4.9,
+    gameprice: 29.99
   });
 }
 

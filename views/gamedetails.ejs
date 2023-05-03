@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Details</title>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -14,7 +14,7 @@
   </head>
   <body>
     <div class="container-fluid align-content-center">
-      <h1 class="display-6">Course Details</h1>
+      <h1 class="display-6">Game Details</h1>
     </div>
     <div class="container-lg">
       <div class="col-lg-8">
@@ -22,52 +22,52 @@
           <div class="card-body">
             <div class="row">
               <div class="col-sm-3">
-                <p class="mb-0">Course ID</p>
+                <p class="mb-0">Game Name</p>
               </div>
               <div class="col-sm-9">
-                <p class="text-primary mb-0"><%= course.courseid %></p>
+                <p class="text-primary mb-0"><%= game.gamename %></p>
               </div>
             </div>
             <hr />
             <div class="row">
               <div class="col-sm-3">
-                <p class="mb-0">Course Name</p>
+                <p class="mb-0">Game Genre</p>
               </div>
               <div class="col-sm-9">
-                <p class="text-primary mb-0"><%= course.coursename %></p>
+                <p class="text-primary mb-0"><%= game.gamegenre %></p>
               </div>
             </div>
             <hr />
             <div class="row">
               <div class="col-sm-3">
-                <p class="mb-0">Semester</p>
+                <p class="mb-0">Game Description</p>
               </div>
               <div class="col-sm-9">
-                <p class="text-primary mb-0"><%= course.semester %></p>
+                <p class="text-primary mb-0"><%= game.gamedesc %></p>
               </div>
             </div>
             <hr />
             <div class="row">
               <div class="col-sm-3">
-                <p class="mb-0">Max Enrollment</p>
+                <p class="mb-0">Game Rating</p>
               </div>
               <div class="col-sm-9">
-                <p class="text-primary mb-0"><%= course.enrollnum %></p>
+                <p class="text-primary mb-0"><%= game.gamerating %></p>
               </div>
             </div>
             <hr />
             <div class="row">
               <div class="col-sm-3">
-                <p class="mb-0">Course Description</p>
+                <p class="mb-0">Game Price</p>
               </div>
               <div class="col-sm-9">
-                <p class="text-muted mb-0"><%= course.coursedesc %></p>
+                <p class="text-primary mb-0"><%= game.gameprice %></p>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <a class="btn btn-secondary" href="/" role="button"> Back to courses </a>
+      <a class="btn btn-secondary" href="/" role="button"> Back to games </a>
     </div>
   </body>
 </html>
